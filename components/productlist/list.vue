@@ -1,5 +1,10 @@
 <template>
   <div class="listimagebackground">
+    <nav class="backsearch">
+      <nuxt-link to ="/#" class="text-white">Back to Home
+      </nuxt-link>
+    </nav>
+  <div class="">
     <div class="d-flex flex-wrap justify-content-between product-wrapper row">
       <div v-for="(reskey, resValue) in showProductList" :key="resValue" class="col-4">
         <div class="card mt-2">
@@ -9,7 +14,7 @@
         <div v-if="reskey.Quantity > 0">
             <label for="quantity">Quantity :</label>
               <input type="number" id="quantity" name="quantity" :value="1" min="1" :max="reskey.Quantity">
-            <nuxt-link to ="/paymentform" class="buynowbutton" @click="orderProduct(reskey)">Buy Now</nuxt-link>
+            <nuxt-link :to="`/paymentform/?productname=${reskey.ProductId}&quantity=${reskey.Quantity}`" class="buynowbutton" @click="orderProduct(reskey)">Buy Now</nuxt-link>
         </div>
         <div v-else>
           <button class="outofbutton">Out of Stock</button>
@@ -23,6 +28,7 @@
     </div>
 
   </div>
+</div>
 </template>
 
 <script>
@@ -106,7 +112,17 @@ export default {
 .listimagebackground {
   width: 100vw;
   height: 400vh;
-  background: url('https://png.pngtree.com/background/20210711/original/pngtree-blue-minimalistic-tech-computer-banner-poster-background-picture-image_1082970.jpg');
+  background-color: antiquewhite;
   background-size: cover;
+}
+.backsearch{
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  background-color: #2b85b6; /* Green */
+  border: none;
+  color: white;
 }
 </style>
