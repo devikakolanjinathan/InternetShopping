@@ -4,9 +4,9 @@
       <nuxt-link to ="/#" class="text-white">Back to Home
       </nuxt-link>
     </nav>
-  <div class="">
+    <div class="">
     <div class="d-flex flex-wrap justify-content-between product-wrapper row">
-      <div v-for="(reskey, resValue) in showProductList" :key="resValue" class="col-4">
+      <div v-for="(reskey, resValue) in displayProductList" :key="resValue" class="col-4">
         <div class="card mt-2">
           <img :src="`https://picsum.photos/600/300/?image=${resValue}`" alt="Denim Jeans" style="width:100%">
           <h1>{{ reskey.ProductName }}</h1>
@@ -41,13 +41,14 @@ export default {
     return{
       pageNumber:1,
       pageSize:12,
-      showProductList:[]
+      displayProductList:[],
+      filter:''
     }
   },
   methods:{
     linkGen(pageNum) {
         this.pageNumber = pageNum
-        this.showProductList = this.responseData.slice(((this.pageSize * this.pageNumber) - 12), this.pageSize * this.pageNumber)
+        this.displayProductList = this.responseData.slice(((this.pageSize * this.pageNumber) - 12), this.pageSize * this.pageNumber)
     },
     getAmount(val){
       let amount = Math.floor((Math.random() * val)+100)
@@ -58,7 +59,7 @@ export default {
     }
   },
   created(){
-    this.showProductList = this.responseData.slice(((this.pageSize * this.pageNumber) - 12), this.pageSize * this.pageNumber)
+    this.displayProductList = this.responseData.slice(((this.pageSize * this.pageNumber) - 12), this.pageSize * this.pageNumber)
   }
 }
 
